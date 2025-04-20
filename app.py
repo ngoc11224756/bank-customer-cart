@@ -1,5 +1,3 @@
-with open("app.py", "w") as f:
-    f.write('''
 import streamlit as st
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -60,7 +58,7 @@ if uploaded_file:
 
         st.subheader("Try Prediction with New Data")
         input_data = {}
-        int_columns = ["age", "children"]  # sửa tại đây nếu có thêm cột int khác
+        int_columns = ["age", "children"]
 
         for col in X.columns:
             if col in categorical_cols:
@@ -81,8 +79,7 @@ if uploaded_file:
 
             if prediction == 1:
                 st.success("Predicted class: **Yes**")
-                st.markdown("🔍 **Khách hàng này có khả năng cao sẽ mua sản phẩm đầu tư PEP.** Bạn nên ưu tiên tiếp cận với các ưu đãi phù hợp.")
+                st.markdown("\U0001F50D **Khách hàng này có khả năng cao sẽ mua sản phẩm đầu tư PEP.** Bạn nên ưu tiên tiếp cận với các ưu đãi phù hợp.")
             else:
                 st.success("Predicted class: **No**")
                 st.markdown("ℹ️ **Khách hàng này có khả năng thấp sẽ mua PEP.** Bạn có thể cần chiến lược khác hoặc ưu tiên nhóm khách hàng khác.")
-''')
