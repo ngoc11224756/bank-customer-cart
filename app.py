@@ -30,7 +30,7 @@ if uploaded_file:
     # Biểu đồ 1: Phân phối mục tiêu PEP
     st.subheader("Distribution of Target Variable (PEP)")
     fig_target, ax_target = plt.subplots(figsize=(4, 3))
-    sns.countplot(x="pep", data=data, ax=ax_target)
+    sns.countplot(x="pep", data=data, ax=ax_target, palette=["#e74c3c", "#2ecc71"])
     ax_target.set_xticklabels(["No", "Yes"])
     ax_target.set_title("PEP Distribution")
     st.pyplot(fig_target)
@@ -45,7 +45,7 @@ if uploaded_file:
     # Biểu đồ 3: Boxplot độ tuổi theo PEP
     st.subheader("Boxplot of Age by PEP")
     fig_box, ax_box = plt.subplots(figsize=(4, 3))
-    sns.boxplot(x="pep", y="age", data=data, ax=ax_box)
+    sns.boxplot(x="pep", y="age", data=data, ax=ax_box, palette=["#e67e22", "#3498db"])
     ax_box.set_xticklabels(["No", "Yes"])
     st.pyplot(fig_box)
 
