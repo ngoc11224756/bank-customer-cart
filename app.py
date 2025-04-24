@@ -25,7 +25,36 @@ if uploaded_file:
         le = LabelEncoder()
         data[col] = le.fit_transform(data[col])
         label_encoders[col] = le
+# Biểu đồ 1: Phân phối mục tiêu PEP
+    st.subheader("Distribution of Target Variable (PEP)")
+    fig_target, ax_target = plt.subplots()
+    sns.countplot(x="pep", data=data, ax=ax_target)
+    ax_target.set_xticklabels(["No", "Yes"])
+    ax_target.set_title("PEP Distribution")
+    st.pyplot(fig_target)
 
+    # Biểu đồ 2: Ma trận tương quan giữa các đặc trưng
+    st.subheader("Feature Correlation Heatmap")
+    fig_corr, ax_corr = plt.subplots(figsize=(10, 8))
+    corr_matrix = data.corr()
+    sns.heatmap(corr_matrix, annot=True, fmt=".2f", cmap="coolwarm", ax=ax_corr)
+    st.pyplot(fig_corr)
+
+    # Biểu đồ 3: Boxplot độ tuổi theo PEP
+    st.subheader("Boxplot of Age by PEP")
+    fig_box, ax_box = plt.subplots()
+    sns.boxplot(x="pep", y="age", data=data, ax=ax_box)
+    ax_box.set_xticklabels(["No", "Yes"])
+    st.pyplot(fig_box)
+
+    # Biểu đồ 4: Phân phối PEP theo nghề nghiệp
+    st.subheader("PEP Distribution by Occupation")
+    if "occupation" in data.columns:
+        fig_occ, ax_occ = plt.subplots(figsize=(12,6))
+        sns.countplot(x="occupation", hue="pep", data=data, ax=ax_occ)
+        ax_occ.set_title("PEP Distribution by Occupation")
+        plt.xticks(rotation=45)
+        st.pyplot(fig_occ)
     if "pep" not in data.columns:
         st.error("The dataset must contain a 'pep' target column.")
     else:
