@@ -95,14 +95,14 @@ if uploaded_file:
     ax_cm.set_title("Confusion Matrix")
     st.pyplot(fig_cm)
 
-        st.subheader("Decision Tree Visualization")
-        fig_tree, ax_tree = plt.subplots(figsize=(20, 10))
-        plot_tree(model, feature_names=X.columns, class_names=["No", "Yes"], filled=True, ax=ax_tree)
-        st.pyplot(fig_tree)
+    st.subheader("Decision Tree Visualization")
+    fig_tree, ax_tree = plt.subplots(figsize=(20, 10))
+    plot_tree(model, feature_names=X.columns, class_names=["No", "Yes"], filled=True, ax=ax_tree)
+    st.pyplot(fig_tree)
 
-        st.subheader("Try Prediction with New Data")
-        input_data = {}
-        int_columns = ["age", "children"]
+    st.subheader("Try Prediction with New Data")
+    input_data = {}
+    int_columns = ["age", "children"]
 
         for col in X.columns:
             if col in categorical_cols:
