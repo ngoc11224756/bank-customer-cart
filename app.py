@@ -62,7 +62,15 @@ if uploaded_file:
         y = data["pep"]
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-        model = DecisionTreeClassifier(criterion="gini", max_depth=5, random_state=42)
+        model = DecisionTreeClassifier(
+            criterion="gini",
+            max_depth=7,
+            max_features=None,
+            min_samples_leaf=5,
+            min_samples_split=2,
+            splitter='best',
+            random_state=42
+        )
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
 
