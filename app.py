@@ -62,31 +62,37 @@ if uploaded_file:
         y = data["pep"]
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-        model = DecisionTreeClassifier(
-            criterion="gini",
-            max_depth=7,
-            max_features=None,
-            min_samples_leaf=5,
-            min_samples_split=2,
-            splitter='best',
-            random_state=42
-        )
-        model.fit(X_train, y_train)
-        y_pred = model.predict(X_test)
+         # Huấn luyện mô hình với tham số chuẩn
+    model = DecisionTreeClassifier(
+        criterion="gini",
+        max_depth=7,
+        max_features=None,
+        min_samples_leaf=5,
+        min_samples_split=2,
+        splitter='best',
+        random_state=42
+    )
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
 
-        st.subheader("Model Evaluation")
-        st.write("**Accuracy:**", accuracy_score(y_test, y_pred))
-        report_str = classification_report(y_test, y_pred)
-        st.text("Classification Report:")
-        st.code(report_str, language='text')
+    # Hiển thị đánh giá mô hình
+    st.subheader("Model Evaluation")
 
-        st.subheader("Confusion Matrix")
-        fig_cm, ax_cm = plt.subplots()
-        cm = confusion_matrix(y_test, y_pred)
-        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=ax_cm)
-        ax_cm.set_xlabel("Predicted")
-        ax_cm.set_ylabel("Actual")
-        st.pyplot(fig_cm)
+    acc = accuracy_score(y_test, y_pred)
+    st.write("**Accuracy:**", acc)
+
+    report_str = classification_report(y_test, y_pred)
+    st.text("Classification Report:")
+    st.code(report_str, language='text')
+
+    st.subheader("Confusion Matrix")
+    fig_cm, ax_cm = plt.subplots()
+    cm = confusion_matrix(y_test, y_pred)
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=ax_cm)
+    ax_cm.set_xlabel("Predicted")
+    ax_cm.set_ylabel("Actual")
+    ax_cm.set_title("Confusion Matrix")
+    st.pyplot(fig_cm)
 
         st.subheader("Decision Tree Visualization")
         fig_tree, ax_tree = plt.subplots(figsize=(20, 10))
