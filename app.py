@@ -37,7 +37,7 @@ if uploaded_file:
 
     # Biểu đồ 2: Ma trận tương quan giữa các đặc trưng
     st.subheader("Feature Correlation Heatmap")
-    fig_corr, ax_corr = plt.subplots(figsize=(6, 5))
+    fig_corr, ax_corr = plt.subplots(figsize=(8, 6))
     corr_matrix = data.corr()
     sns.heatmap(corr_matrix, annot=True, fmt=".2f", cmap="coolwarm", ax=ax_corr)
     st.pyplot(fig_corr)
